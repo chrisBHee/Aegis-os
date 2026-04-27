@@ -1,0 +1,24 @@
+[package]
+name = "aegis-kernel"
+version.workspace = true
+edition = "2024"
+authors = ["AEGIS OS Contributors"]
+license = "AGPL-3.0"
+description = "AEGIS OS Microkernel — privacy-first, security-first with post-quantum encryption"
+
+[dependencies]
+spin = "0.9"
+bitflags = "2.9"
+x86_64 = "0.15"
+pic8259 = "0.11"
+pc-keyboard = "0.8"
+uart_16550 = "0.3"
+linked_list_allocator = "0.10"
+lazy_static = { version = "1.5", features = ["spin_no_std"] }
+sha3 = { version = "0.10", default-features = false }
+bootloader_api = "0.11"
+
+[dependencies.crossbeam-queue]
+version = "0.3"
+default-features = false
+features = ["alloc"]
