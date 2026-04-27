@@ -59,7 +59,13 @@ impl CSpace {
         }
 
         let slot = CapSlotIndex::new(self.next_slot);
-        self.next_slot += 1;
+        self.next_slot = self
+            .next_slot
+            .checked_add(1)
+            .ok_or(CapError::CSpaceFull)?;
+        if self.slots.contains_key(&slot) {
+            return Err(CapError::SlotOccupied);
+        }
         self.slots.insert(slot, cap);
         Ok(slot)
     }
