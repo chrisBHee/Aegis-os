@@ -1,0 +1,9 @@
+[package]
+name = "aegis-boot"
+version.workspace = true
+edition = "2024"
+authors = ["AEGIS OS Contributors"]
+license = "AGPL-3.0"
+description = "AEGIS OS UEFI Bootloader — PQ-signed secure boot"
+
+[dependencies]
