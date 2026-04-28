@@ -89,7 +89,7 @@ impl MlKem1024 {
             },
         )?;
 
-        let priv_key_id = keystore::store_key(
+        let priv_key_id = match keystore::store_key(
             KeyMaterial::new(priv_key_data),
             KeyMetadata {
                 key_type: KeyType::MlKemPrivate,
@@ -97,7 +97,13 @@ impl MlKem1024 {
                 created_at: 0,
                 owner: 0,
             },
-        )?;
+        ) {
+            Ok(id) => id,
+            Err(e) => {
+                let _ = keystore::destroy_key(pub_key_id);
+                return Err(e);
+            }
+        };
 
         Ok((pub_key_id, priv_key_id))
     }

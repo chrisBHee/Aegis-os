@@ -67,7 +67,7 @@ impl MlDsa65 {
             },
         )?;
 
-        let sign_key_id = keystore::store_key(
+        let sign_key_id = match keystore::store_key(
             KeyMaterial::new(sign_key_data),
             KeyMetadata {
                 key_type: KeyType::MlDsaSigning,
@@ -75,7 +75,13 @@ impl MlDsa65 {
                 created_at: 0,
                 owner: 0,
             },
-        )?;
+        ) {
+            Ok(id) => id,
+            Err(e) => {
+                let _ = keystore::destroy_key(pub_key_id);
+                return Err(e);
+            }
+        };
 
         Ok((pub_key_id, sign_key_id))
     }
