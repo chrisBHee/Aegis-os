@@ -1,0 +1,9 @@
+[package]
+name = "aegis-hal"
+version.workspace = true
+edition = "2024"
+authors = ["AEGIS OS Contributors"]
+license = "AGPL-3.0"
+description = "AEGIS OS Hardware Abstraction Layer"
+
+[dependencies]

@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = [
+    "aegis-boot",
+    "aegis-kernel",
+    "aegis-hal",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["AEGIS OS Contributors"]
+license = "AGPL-3.0"
+repository = "https://github.com/MagaPage/MAAA"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
+opt-level = "z"
+strip = true
